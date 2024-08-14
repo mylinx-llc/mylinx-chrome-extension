@@ -1,9 +1,10 @@
 import React from 'react';
-import { createRoot } from 'react-dom/client';
+import { render } from 'react-dom';
 
 import Panel from './Panel';
 import './index.css';
+import '../../assets/styles/tailwind.css';
 
-const container = document.getElementById('app-container');
-const root = createRoot(container); // createRoot(container!) if you use TypeScript
-root.render(<Panel />);
+render(<Panel />, window.document.querySelector('#app-container'));
+
+if (module.hot) module.hot.accept();

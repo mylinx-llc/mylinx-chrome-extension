@@ -1,9 +1,13 @@
 import React from 'react';
-import { createRoot } from 'react-dom/client';
+import { render } from 'react-dom';
 
 import Options from './Options';
 import './index.css';
+import '../../assets/styles/tailwind.css';
 
-const container = document.getElementById('app-container');
-const root = createRoot(container); // createRoot(container!) if you use TypeScript
-root.render(<Options title={'Settings'} />);
+render(
+  <Options title={'Settings'} />,
+  window.document.querySelector('#app-container')
+);
+
+if (module.hot) module.hot.accept();
