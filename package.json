@@ -10,11 +10,17 @@
   },
   "dependencies": {
     "@hot-loader/react-dom": "^17.0.2",
+    "@shadcn/ui": "^0.0.4",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.1",
     "lucide-react": "^0.427.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-hot-loader": "^4.13.0",
-    "sass": "^1.77.8"
+    "react-qrcode-logo": "^3.0.0",
+    "sass": "^1.77.8",
+    "tailwind-merge": "^2.5.2",
+    "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
     "@babel/core": "^7.17.0",

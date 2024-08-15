@@ -10,6 +10,7 @@ const Popup = () => {
   // State to track which icon is active
   const [activeIcon, setActiveIcon] = useState('link');
   const [initPopup, setInitPopup] = useState(false);
+  const [qrCodeOpen, setQrCodeOpen] = useState(false);
 
   useEffect(() => {
     if (!initPopup) {
@@ -22,10 +23,11 @@ const Popup = () => {
     };
   }, []);
 
+
   return (
     <ToastProvider>
     <div className="App">
-      <div className="popup-container">
+      <div className={`w-full flex flex-col ${qrCodeOpen ? 'h-[365px]': 'h-[220px]'}`}>
         {/* Navigation Bar */}
         <nav className="popup-nav">
           <NavHeader activeIcon={activeIcon} setActiveIcon={setActiveIcon} />
@@ -33,7 +35,7 @@ const Popup = () => {
 
         {/* Content Area */}
         <div className="popup-content">
-          {activeIcon === "link" && ( <Link initPopup={initPopup} />)}
+          {activeIcon === "link" && ( <Link initPopup={initPopup} qrCodeOpen={qrCodeOpen} setQrCodeOpen={setQrCodeOpen} />)}
           {activeIcon === "clock" && ( <LinkHistory />)}
         </div>
 

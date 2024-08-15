@@ -3,12 +3,7 @@ body {
   font-family: Arial, sans-serif;
 }
 
-.popup-container {
-  width: 405px;
-  height: 225px;
-  display: flex;
-  flex-direction: column;
-}
+
 
 .popup-nav {
   background-color: #e8e9ea;

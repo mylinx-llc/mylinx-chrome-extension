@@ -4,8 +4,9 @@ import React, { useEffect } from 'react';
 import { extractOpenGraphData, getCurrentTabURL } from '../../../util';
 import { Copy, Share, QrCode } from 'lucide-react';
 import { useToast } from '../../ToastContext';
+import QrCodeDownloader from './QrCodeDownloader';
 
-const Link = ({ initPopup }) => {
+const Link = ({ initPopup, qrCodeOpen, setQrCodeOpen  }) => {
   const [ogData, setOgData] = useState({
     favicon: '',
     image: '',
@@ -25,6 +26,14 @@ const Link = ({ initPopup }) => {
       const currentTabURL = await getCurrentTabURL();
       const hasLogged = sessionStorage.getItem('firstOpenLogged');
       const storedURL = localStorage.getItem('firstOpenedURL');
+
+
+      // edge cases
+      if (currentTabURL.includes("chrome://")){
+        setCurrentTabURL(currentTabURL)
+        setIsLoading(false);
+        return        
+      }
 
       // user already shorten this url use saved data
       if (storedURL === currentTabURL) {
@@ -58,9 +67,10 @@ const Link = ({ initPopup }) => {
   }, [initPopup]);
 
   const shortenURL = async (currentTabURL) => {
+    let host = !process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'http://mylinx.cc';
+
     try {
-      const response = await fetch(
-        'http://localhost:3000/api/link-shortener/chrome-extension-shorten-links',
+      const response = await fetch( `${host}/api/link-shortener/chrome-extension-shorten-links`,
         {
           method: 'POST',
           headers: {
@@ -119,37 +129,56 @@ const Link = ({ initPopup }) => {
   const handleShare = () => {};
 
   const handleQRCode = () => {
-    // Handle QR Code generation and display logic here
-    console.log('Generate QR Code for URL:', ogData.shortUrl);
+    setQrCodeOpen((prev) => !prev);
   };
 
   return (
-    <div className="w-full h-full flex justify-between items-center">
+    <div className="w-full h-full">
       {isLoading && <span className="loader"></span>}
       {!isLoading && (
-        <div className="w-full flex flex-col items-start justify-center">
-          <div className="flex justify-center">
+        <div className="h-full flex flex-col items-start justify-between">
+          
+          { !qrCodeOpen ? (
+            <div className="flex justify-center text-md">
+              {currentTabURL.includes("chrome://") && (
+                <div className="flex flex-col">
+                  <div className='font-bold'>Can not shorten this page.</div>
+                  <div>If you believe this is wrong, <br></br>please report any issues at our
+                    <span>&nbsp;<a href="https://discord.gg/fanWUQgygx" target='_blank' className='text-green-500'>Discord.</a></span>
+                  </div>
+                </div>
+              )}
             <div className="flex items-center space-x-4 px-2 py-1">
               {(ogData.favicon || ogData.image) && (
                 <img
                   src={ogData.favicon || ogData.image}
                   alt="Shorten Url Favicon"
-                  className="w-13 h-13 object-cover"
+                  className="w-12 h-12 object-cover"
+                  height={48}
+                  width={48}
                 />
               )}
-              <div className="text-xl font-medium">
+              <div className="text-2xl font-medium">
                 {ogData.shortUrl ? ogData.shortUrl.replace('https://', '') : ''}
               </div>
             </div>
           </div>
+          ) : (
+            <div className='w-full '>
+                <QrCodeDownloader
+                contentString={ogData.shortUrl}
+                watermark={false}
+                />
+            </div>
+          )}
           <div className="flex flex-row space-x-2 px-2 pt-4 ">
             <button onClick={handleCopy} className="p-2 default-icon">
               <Copy size={26} />
             </button>
-            <button onClick={handleShare} className="p-2 default-icon">
+            {/* <button onClick={handleShare} className="p-2 default-icon">
               <Share size={26} />
-            </button>
-            <button onClick={handleQRCode} className="p-2 default-icon">
+            </button> */}
+            <button onClick={handleQRCode} className={`cursor-pointer default-icon p-2 ${qrCodeOpen ? 'active-icon': ''}`}>
               <QrCode size={26} />
             </button>
           </div>
