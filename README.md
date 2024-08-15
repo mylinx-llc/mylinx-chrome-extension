@@ -1,13 +1,8 @@
-<img src="src/assets/img/icon-128.png" width="64"/>
+<img src="src/assets/img/icon-128.png" style="background-color:white; border-radius: 12px; padding: 10px;" width="156"/>
 
-# Tailwind React Chrome Extension Template (Tailwind 3, React 17 and Webpack 5)
+# Chrome Extension Mylinx
 
 ## Features
-
-This is a basic Chrome Extensions boilerplate to help you write modular and modern Javascript code, load CSS easily and [automatic reload the browser on code changes](https://webpack.github.io/docs/webpack-dev-server.html#automatic-refresh).
-
-This boilerplate has the following features:
-
 - [Chrome Extension Manifest V3](https://developer.chrome.com/docs/extensions/mv3/intro/mv3-overview/)
 - [Tailwind 3](https://tailwindcss.com/)
 - [React 17](https://reactjs.org)
@@ -123,7 +118,3 @@ ApiCall({ key: secrets.key });
 - [Webpack documentation](https://webpack.js.org/concepts/)
 - [Chrome Extension documentation](https://developer.chrome.com/extensions/getstarted)
 
-## Credits
-
-- Michael Xieyang Liu | [Website](https://lxieyang.github.io)
-- This boilerplate is largely derived from [lxieyang/chrome-extension-boilerplate-react](https://github.com/lxieyang/chrome-extension-boilerplate-react), which in turn is adapted from [samuelsimoes/chrome-extension-webpack-boilerplate](https://github.com/samuelsimoes/chrome-extension-webpack-boilerplate).

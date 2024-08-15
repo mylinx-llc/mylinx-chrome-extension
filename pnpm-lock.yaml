@@ -8,6 +8,9 @@ dependencies:
   '@hot-loader/react-dom':
     specifier: ^17.0.2
     version: 17.0.2(react@17.0.2)
+  lucide-react:
+    specifier: ^0.427.0
+    version: 0.427.0(react@17.0.2)
   react:
     specifier: ^17.0.2
     version: 17.0.2
@@ -5039,6 +5042,14 @@ packages:
     dependencies:
       yallist: 3.1.1
     dev: true
+
+  /lucide-react@0.427.0(react@17.0.2):
+    resolution: {integrity: sha512-lv9s6c5BDF/ccuA0EgTdskTxIe11qpwBDmzRZHJAKtp8LTewAvDvOM+pTES9IpbBuTqkjiMhOmGpJ/CB+mKjFw==}
+    peerDependencies:
+      react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0-rc
+    dependencies:
+      react: 17.0.2
+    dev: false
 
   /make-dir@3.1.0:
     resolution: {integrity: sha512-g3FeP20LNwhALb/6Cz6Dd4F2ngze0jz7tbzrD2wAV+o9FeNHe4rL+yK2md0J/fiSf1sa1ADhXqi5+oVwOM/eGw==}

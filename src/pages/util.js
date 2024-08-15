@@ -12,6 +12,43 @@ export function extractMainDomain(hostname) {
       });
     });
   };
+
+  export const setKeyInLocalStorage = async (key, value) => {
+    return new Promise((resolve, reject) => {
+      chrome.storage.local.set({ [key]: value }, function () {
+        if (chrome.runtime.lastError) {
+          reject(chrome.runtime.lastError);
+        } else {
+          resolve(true);
+        }
+      });
+    });
+  };
+
+  export const getCurrentTabURL = async () => {
+    return new Promise((resolve, reject) => {
+      chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+        const currentTab = tabs[0];
+        if (currentTab && currentTab.url) {
+          resolve(currentTab.url);
+        } else {
+          reject('Unable to retrieve the current tab URL');
+        }
+      });
+    });
+  };
+
+  export const extractOpenGraphData = () => {
+    return new Promise((resolve, reject) => {
+      chrome.runtime.sendMessage({ action: 'getOGData' }, (response) => {
+        if (chrome.runtime.lastError) {
+          reject(chrome.runtime.lastError);
+        } else {
+          resolve(response);
+        }
+      });
+    });
+  };
   
   export const getCurrentTabDomain = async () => {
     return new Promise((resolve, reject) => {
