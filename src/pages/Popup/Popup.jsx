@@ -4,6 +4,7 @@ import NavHeader from './components/NavHeader';
 import Footer from './components/Footer';
 import Link from './components/Link';
 import LinkHistory from './components/LinkHistory';
+import { ToastProvider } from './ToastContext';
 
 const Popup = () => {
   // State to track which icon is active
@@ -22,6 +23,7 @@ const Popup = () => {
   }, []);
 
   return (
+    <ToastProvider>
     <div className="App">
       <div className="popup-container">
         {/* Navigation Bar */}
@@ -41,6 +43,7 @@ const Popup = () => {
         </footer>
       </div>
     </div>
+    </ToastProvider>
   );
 };
 

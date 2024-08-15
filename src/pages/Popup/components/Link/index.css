@@ -30,3 +30,12 @@
     background-position: 100% 0, 120px 0, 120px 40px, 120px 80px;
   }
 }
+
+.default-icon {
+  color: #050505;
+  transition: color 0.15s ease-in;
+}
+
+.default-icon:hover {
+  color: #10B981;
+}
