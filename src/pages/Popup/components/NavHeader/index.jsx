@@ -1,10 +1,16 @@
 import "./index.css";
 import React from 'react';
-import logo from '../../../../assets/img/logo-long.svg';
 import { Link } from 'lucide-react';
 import { Clock3 } from 'lucide-react';
+import logo from "../../../../assets/img/icon-34.png"
 
 const NavHeader = ({ activeIcon, setActiveIcon }) => {
+    const handleLinkClick = (url) => {
+        chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+            chrome.tabs.update(tabs[0].id, { url });
+        });
+    };
+  
     return (
         <>
             <div className="w-full h-full">
@@ -22,7 +28,9 @@ const NavHeader = ({ activeIcon, setActiveIcon }) => {
                         </div>
                     </div>
                     <div className="">
+                    <button onClick={() => handleLinkClick("https://mylinx.cc/")} aria-label="mylinx dashboard">
                         <img src={logo} alt="logo" />
+                        </button>
                     </div>
                 </div>
             </div>

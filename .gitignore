@@ -8,6 +8,10 @@
 
 # production
 /build
+build.crx
+.build
+build.zip
+build.pem
 
 # misc
 .DS_Store
@@ -19,3 +23,6 @@
 
 # secrets
 secrets.*.js
+
+
+

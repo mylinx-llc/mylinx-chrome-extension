@@ -27,7 +27,7 @@ const Popup = () => {
   return (
     <ToastProvider>
     <div className="App">
-      <div className={`w-full flex flex-col ${qrCodeOpen ? 'h-[365px]': 'h-[220px]'}`}>
+      <div className={`w-full flex flex-col ${(qrCodeOpen || activeIcon === "clock") ? 'h-[365px]': 'h-[220px]'}`}>
         {/* Navigation Bar */}
         <nav className="popup-nav">
           <NavHeader activeIcon={activeIcon} setActiveIcon={setActiveIcon} />
@@ -36,7 +36,7 @@ const Popup = () => {
         {/* Content Area */}
         <div className="popup-content">
           {activeIcon === "link" && ( <Link initPopup={initPopup} qrCodeOpen={qrCodeOpen} setQrCodeOpen={setQrCodeOpen} />)}
-          {activeIcon === "clock" && ( <LinkHistory />)}
+          {activeIcon === "clock" && ( <LinkHistory qrCodeOpen={qrCodeOpen} setQrCodeOpen={setQrCodeOpen} />)}
         </div>
 
         {/* Footer */}

@@ -98,11 +98,23 @@ const Link = ({ initPopup, qrCodeOpen, setQrCodeOpen  }) => {
             dateCreated,
           };
 
-          console.log(updatedData);
           localStorage.setItem(
             'firstOpenedOgData',
             JSON.stringify(updatedData)
           ); // Save to localStorage
+          
+          // Retrieve exisitng ogData array from localStorage
+          const existingOgDataArray = JSON.parse(localStorage.getItem('ogDataArray')) || [];
+          // Check if the new data is already in the array
+          const isDataUnique = !existingOgDataArray.some(
+            (data) => data.shortUrl === updatedData.shortUrl
+          );
+
+          if (isDataUnique) {
+            // Append new data to the array and save it to localStorage
+            existingOgDataArray.push(updatedData);
+            localStorage.setItem('ogDataArray', JSON.stringify(existingOgDataArray));
+          }
 
           handleCopy()
           return updatedData;
@@ -171,7 +183,7 @@ const Link = ({ initPopup, qrCodeOpen, setQrCodeOpen  }) => {
                 />
             </div>
           )}
-          <div className="flex flex-row space-x-2 px-2 pt-4 ">
+          <div className="flex flex-row space-x-2 px-2 pt-2 ">
             <button onClick={handleCopy} className="p-2 default-icon">
               <Copy size={26} />
             </button>
