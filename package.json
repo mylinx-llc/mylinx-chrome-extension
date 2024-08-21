@@ -1,6 +1,6 @@
 {
   "name": "chrome-extension-mylinx",
-  "version": "1.0.0",
+  "version": "1.0.5",
   "description": "A chrome extension for mylinx services including free url shortener and tracking services.",
   "license": "MIT",
   "scripts": {

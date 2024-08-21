@@ -23,6 +23,6 @@ build.pem
 
 # secrets
 secrets.*.js
-
+.env
 
 

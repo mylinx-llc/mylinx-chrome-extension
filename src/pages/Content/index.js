@@ -26,6 +26,27 @@ function extractOpenGraphData() {
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.action === 'getOGData') {
-    sendResponse(extractOpenGraphData());
+    if (!/^chrome:\/\/|^about:/.test(window.location.href)) {
+      // Only execute if it's not a special page
+      sendResponse(extractOpenGraphData());
+    }
   }
 });
+
+function onUrlChange() {
+  if (window.location.pathname === '/edit/links') {
+    chrome.runtime.sendMessage({ action: 'auth-check' }, (response) => {
+      if (chrome.runtime.lastError) {
+        console.error('Error sending auth-check message:', chrome.runtime.lastError);
+      } else {
+        console.log('Auth-check message sent:', response);
+      }
+    });
+  }
+}
+
+// Run the check on page load
+onUrlChange();
+// Monitor URL changes
+window.addEventListener('popstate', onUrlChange);
+window.addEventListener('hashchange', onUrlChange);

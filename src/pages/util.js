@@ -66,3 +66,22 @@ export function extractMainDomain(hostname) {
       setTimeout(resolve, ms);
     });
   }
+
+  export function isUnpackedExtension() {
+    try {
+        // Access the extension's manifest
+        const manifest = chrome.runtime.getManifest();
+        
+        // Check if the manifest has an `update_url` field
+        const isUnpacked = !manifest.update_url;
+
+        // Optionally: Log or debug the result
+        console.log('Is Unpacked Extension:', isUnpacked);
+
+        return isUnpacked;
+    } catch (e) {
+        // Handle errors accessing the manifest
+        console.error('Error accessing extension manifest:', e);
+        return false; // If there's an error, assume packed
+    }
+}

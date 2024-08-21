@@ -30,6 +30,11 @@
     "identity",
     "storage",
     "activeTab",
-    "scripting"
+    "scripting",
+    "cookies"
+  ],
+  "host_permissions": [
+    "http://localhost:3000/*",
+    "https://mylinx.cc/*"
   ]
 }
